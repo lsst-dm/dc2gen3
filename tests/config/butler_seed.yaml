@@ -1,0 +1,5 @@
+registry:
+   db: postgresql:///bogus?host=example.org&port=0&user=nobody
+   namespace: bogusnamespace
+datastore:
+   checksum: False

@@ -1,0 +1,7 @@
+setupRequired(daf_butler)
+setupRequired(pipe_tasks)
+setupRequired(obs_base)
+setupRequired(obs_lsst)
+setupRequired(utils)
+envPrepend(PYTHONPATH, ${PRODUCT_DIR}/python)
+envPrepend(PATH, ${PRODUCT_DIR}/bin)

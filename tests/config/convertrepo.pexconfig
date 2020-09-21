@@ -1,0 +1,33 @@
+# How to transfer files (None for no transfer).
+config.raws.transfer = 'symlink'
+
+# If True (default), only convert datasets that are related to the
+# ingested visits.  Ignored unless a list of visits is passed to run().
+config.relatedOnly = True
+
+# Glob-style patterns for dataset type names that should not be converted
+# despite matching a pattern in datasetIncludePatterns.
+
+config.datasetIgnorePatterns = ['_raw', 'raw_hdu', 'raw_amp',
+                                '*_camera', 'singleFrameDriver_metadata']
+
+# Filename globs that should be ignored instead of being treated as datasets.
+config.fileIgnorePatterns = ['README.txt', '*~?', 'butler.yaml',
+                             'gen3.sqlite3', 'registry.sqlite3',
+                             'calibRegistry.sqlite3', '_mapper',
+                             '_parent', 'repositoryCfg.yaml',
+                             '*.log', '*.png', 'rerun*']
+
+#
+# Set only if creating a new repo
+#
+
+# If True (default), add dimension records for the Instrument and
+# its filters and detectors to the registry instead of assuming
+# they are already present.
+config.doRegisterInstrument = True
+
+# If True (default), ingest human-curated calibrations directly
+# via the Instrument interface.  Note that these calibrations are
+# never converted from Gen2 repositories.
+config.doWriteCuratedCalibrations = True
