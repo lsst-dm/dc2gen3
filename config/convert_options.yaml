@@ -1,6 +1,6 @@
 gen2_root: /data/des90.a/data/neilsen/DC2/repoRun2.2i
 gen3_root:  /data/des90.a/data/neilsen/DC2gen3
-instrument: lsst.obs.lsst.LsstImSim
+instrument: lsst.obs.lsst.LsstCamImSim
 delete_old_gen3: True
 create_new_gen3: True
 convertRepo_config: convertrepo.pexconfig 
