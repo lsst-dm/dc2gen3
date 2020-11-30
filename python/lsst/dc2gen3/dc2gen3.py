@@ -41,6 +41,39 @@ CONVERT_REPO_TASK_NAME = ConvertRepoTask._DefaultName
 @dataclass(order=True)
 class DC2Converter():
     """Manager of conversion of DC2 from gen2 to gen3.
+
+    Parameters
+    ----------
+    gen2_root : `str`
+        Complete path to the root Gen2 data repository.  This should be
+        a data repository that includes a Gen2 registry and any raw files
+        and/or reference catalogs.
+    gen3_root : `str`
+        The root directory for the destination(POSIX) gen 3 butler
+    instrument : `lsst.obs.base.Instrument`
+        The Gen3 instrument that should be used for this conversion.
+    convert_repo_config : `ConvertRepoTask.ConfigClass`
+        Configuration for the ConvertRepo task
+    reruns : `list` of `Rerun`
+        Specifications for rerun (processing output) collections to
+        convert.
+    calibs : `dict` [`str`, `str`]
+        Dictionary mapping calibration repository path to the
+        `~lsst.daf.butler.CollectionType.CALIBRATION` collection that
+        converted datasets within it should be certified into.
+    visits : iterable of `int`, optional
+        The integer IDs of visits to convert.  If not provided, all visits
+        in the Gen2 root repository will be converted.
+    delete_old_gen3 : `bool`
+        Delete the old gen3 butler and its data if it exists. DESTRUCTIVE!
+    create_new_gen3 : `bool`
+        Create a new gen3 repository.
+    convert_skymap : `bool`
+        Create a skymap for the gen3 repository.
+    butler_seed : `str`, optional
+        Path to the butler seed files for the new gen3 repo.
+    processes : `int`, optional
+        The number of processes to use for conversion.
     """
     # pylint: disable=too-many-instance-attributes
     gen2_root: str
@@ -54,6 +87,7 @@ class DC2Converter():
     create_new_gen3: bool = False
     convert_skymap: bool = False
     butler_seed: Optional[str] = None
+    processes: int = 1
     _gen3_butler: Optional[Butler] = field(hash=False, default=None)
 
     # The __init__ method is implicitly created by the @dataclass decorator
@@ -184,7 +218,8 @@ class DC2Converter():
         task.run(root=self.gen2_root,
                  reruns=self.reruns,
                  calibs=self.calibs,
-                 visits=self.visits)
+                 visits=self.visits,
+                 processes=self.processes)
 
         lsst.log.info("Finished running the ConvertRepoTask")
         return task
