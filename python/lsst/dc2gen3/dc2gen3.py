@@ -20,6 +20,7 @@ import lsst.log
 import lsst.log.utils
 from lsst.utils import doImport
 from lsst.obs.base.gen2to3 import ConvertRepoTask
+from lsst.obs.base.gen2to3 import CalibRepo
 from lsst.obs.base.gen2to3 import Rerun
 from lsst.daf.butler import Butler, DatasetType
 from lsst.daf.butler.registry import ConflictingDefinitionError
@@ -57,10 +58,11 @@ class DC2Converter():
     reruns : `list` of `Rerun`
         Specifications for rerun (processing output) collections to
         convert.
-    calibs : `dict` [`str`, `str`]
-        Dictionary mapping calibration repository path to the
-        `~lsst.daf.butler.CollectionType.CALIBRATION` collection that
-        converted datasets within it should be certified into.
+    calibs : `list` of `CalibRepo`
+        Specifications for Gen2 calibration repos to convert.  If `None`
+        (default), curated calibrations only will be written to the default
+        calibration collection for this instrument; set to ``()`` explictly
+        to disable this.
     visits : iterable of `int`, optional
         The integer IDs of visits to convert.  If not provided, all visits
         in the Gen2 root repository will be converted.
@@ -81,7 +83,7 @@ class DC2Converter():
     instrument: lsst.obs.base.Instrument = field(hash=False)
     convert_repo_config: ConvertRepoTask.ConfigClass = field(hash=False)
     reruns: List[Rerun] = field(hash=False)
-    calibs: Dict[str, str] = field(hash=False, default=None)
+    calibs: List[CalibRepo] = field(hash=False, default=None)
     visits: Optional[Iterable[int]] = field(hash=False, default=None)
     delete_old_gen3: bool = False
     create_new_gen3: bool = False
@@ -127,10 +129,8 @@ class DC2Converter():
         task_config.load(params['convertRepo_config'])
         init_kwargs['convert_repo_config'] = task_config
 
-        init_kwargs['calibs'] = {}
-        for key, value in params['calibs'].items():
-            collection_name = instrument.makeCollectionName(value)
-            init_kwargs['calibs'][key] = collection_name
+        init_kwargs['calibs'] = \
+            [CalibRepo(**kws) for kws in params['calibs']]
 
         # Everything that didn't need processing, assign directly
         unmapped = ('convertRepo_config',)

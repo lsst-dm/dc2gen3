@@ -30,4 +30,4 @@ config.doRegisterInstrument = True
 # If True (default), ingest human-curated calibrations directly
 # via the Instrument interface.  Note that these calibrations are
 # never converted from Gen2 repositories.
-config.doWriteCuratedCalibrations = True
+# config.doWriteCuratedCalibrations = True
