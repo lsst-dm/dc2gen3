@@ -10,7 +10,7 @@ import shutil
 import os
 import sys
 import argparse
-from typing import Iterable, Optional, List, Dict
+from typing import Iterable, Optional, List
 from dataclasses import dataclass, field
 
 import yaml
