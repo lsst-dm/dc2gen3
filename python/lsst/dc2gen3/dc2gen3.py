@@ -19,8 +19,10 @@ import psycopg2
 import lsst.log
 import lsst.log.utils
 from lsst.utils import doImport
-from lsst.obs.base.gen2to3 import ConvertRepoTask
-from lsst.obs.base.gen2to3 import CalibRepo
+from lsst.obs.base.gen2to3 import (
+    ConvertRepoTask,
+    CalibRepo,
+)
 from lsst.obs.base.gen2to3 import Rerun
 from lsst.daf.butler import Butler, DatasetType
 from lsst.daf.butler.registry import ConflictingDefinitionError
@@ -130,7 +132,7 @@ class DC2Converter():
         init_kwargs['convert_repo_config'] = task_config
 
         init_kwargs['calibs'] = \
-            [CalibRepo(**kws) for kws in params['calibs']]
+            [CalibRepo(**kwds) for kwds in params['calibs']]
 
         # Everything that didn't need processing, assign directly
         unmapped = ('convertRepo_config',)
