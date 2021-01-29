@@ -1,0 +1,6 @@
+origin_root: /sps/lssttest/dataproducts/desc/DC2/Run2.2i/v19.0.0-v1
+gen2_root: /data/des90.a/data/neilsen/dc2gen3_tests/2021-01-28/gen2
+reruns:
+    - path: rerun/run2.2i-calexp-v1
+calibs:
+    - path: CALIB
