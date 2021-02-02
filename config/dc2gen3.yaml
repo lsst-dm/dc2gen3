@@ -1,0 +1,17 @@
+gen2_root: /data/des90.a/data/neilsen/dc2gen3_tests/2021-01-28/gen2
+gen3_root: /data/des90.a/data/neilsen/dc2gen3_tests/2021-01-28/gen3
+instrument: lsst.obs.lsst.LsstCamImSim
+delete_old_gen3: True
+create_new_gen3: True
+convertRepo_config: convertrepo.pexconfig
+butler_seed: butler_seed.yaml
+reruns:
+    - path: rerun/run2.2i-calexp-v1
+      runName: run2.2i-calexp-v1
+      chainName: null
+      parents: []
+visits: [428530]
+calibs:
+    - path: CALIB
+convert_skymap: False
+processes: 1
