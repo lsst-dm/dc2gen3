@@ -1,5 +1,5 @@
 registry:
-   db: postgresql:///gen3butler?host=des90.fnal.gov&port=5434&user=neilsen
-   namespace: dc2gen3
+   db: postgresql://lsst-pg-prod1.ncsa.illinois.edu:5432/lsstdb1
+   namespace: neilsen
 datastore:
    checksum: False

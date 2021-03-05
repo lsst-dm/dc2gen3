@@ -1,17 +1,28 @@
-gen2_root: /data/des90.a/data/neilsen/dc2gen3_tests/2021-01-28/gen2
-gen3_root: /data/des90.a/data/neilsen/dc2gen3_tests/2021-01-28/gen3
+gen2_root: /datasets/DC2/DR6/Run2.2i/patched/2021-02-10
+gen3_root: GEN3ROOT
 instrument: lsst.obs.lsst.LsstCamImSim
-delete_old_gen3: True
-create_new_gen3: True
-convertRepo_config: convertrepo.pexconfig
+delete_old_gen3: False
+create_new_gen3: False
+convertRepo_config: convertRepo.py
 butler_seed: butler_seed.yaml
 reruns:
     - path: rerun/run2.2i-calexp-v1
-      runName: run2.2i-calexp-v1
-      chainName: null
-      parents: []
-visits: [428530]
-calibs:
-    - path: CALIB
+      runName: 2.2i/runs/DR6/v1/calexps/direct
+      chainName: 2.2i/runs/DR6/v1/calexps
+      parents: [2.2i/runs/DR6/v1/calexps/direct, 2.2i/raw/all]
+    - path: rerun/run2.2i-coadd-wfd-dr6-v1-grizy
+      runName: 2.2i/runs/DR6/v1/coadd-wfd/grizy/direct
+      chainName: 2.2i/runs/DR6/v1/coadd-wfd/grizy
+      parents: [2.2i/runs/DR6/v1/coadd-wfd/grizy/direct, 2.2i/runs/DR6/v1/calexps]
+    - path: rerun/run2.2i-coadd-wfd-dr6-v1-u
+      runName: 2.2i/runs/DR6/v1/coadd-wfd/u/direct
+      chainName: 2.2i/runs/DR6/v1/coadd-wfd/u
+      parents: [2.2i/runs/DR6/v1/coadd-wfd/u/direct, 2.2i/runs/DR6/v1/calexps]
+    - path: rerun/run2.2i-coadd-wfd-dr6-v1
+      runName: 2.2i/runs/DR6/v1/coadd-wfd/direct
+      chainName: 2.2i/runs/DR6/v1/coadd-wfd
+      parents: [2.2i/runs/DR6/v1/coadd-wfd/direct, 2.2i/runs/DR6/v1/coadd-wfd/u, 2.2i/runs/DR6/v1/coadd-wfd/grizy]
+calibs: []
 convert_skymap: False
 processes: 1
+# visits: [428530]
