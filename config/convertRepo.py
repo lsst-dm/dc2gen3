@@ -3,10 +3,6 @@ from lsst.obs.base.gen2to3 import ConvertRepoSkyMapConfig
 # How to transfer files (None for no transfer).
 config.raws.transfer = 'direct'
 
-# If True (default), only convert datasets that are related to the
-# ingested visits.  Ignored unless a list of visits is passed to run().
-config.relatedOnly = True
-
 # Glob-style patterns for dataset type names that should not be converted
 # despite matching a pattern in datasetIncludePatterns.
 
@@ -24,6 +20,9 @@ config.fileIgnorePatterns = ['README.txt', '*~?', 'butler.yaml',
 # its filters and detectors to the registry instead of assuming
 # they are already present.
 config.doRegisterInstrument = False
+
+# See https://lsstc.slack.com/archives/CSU6W4PFD/p1615227935014400?thread_ts=1615227543.014200&cid=CSU6W4PFD
+config.doMakeUmbrellaCollection = False
 
 # Repeat the configs used to create DC2:
 # https://github.com/LSSTDESC/gen3_workflow/blob/u/jchiang/gen3_scripts/config/makeSkyMap.py
